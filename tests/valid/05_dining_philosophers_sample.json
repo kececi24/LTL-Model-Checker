@@ -1,0 +1,43 @@
+{
+    "atomic_propositions": [
+        "P0_eating",
+        "P1_eating",
+        "P2_eating",
+        "deadlock"
+    ],
+    "initial_states": [
+        "T_T_T"
+    ],
+    "states": {
+        "T_T_T": {
+            "labels": [],
+            "transitions": [
+                "H_T_T",
+                "H_H_H"
+            ]
+        },
+        "H_T_T": {
+            "labels": [],
+            "transitions": [
+                "E_T_T",
+                "T_T_T"
+            ]
+        },
+        "E_T_T": {
+            "labels": [
+                "P0_eating"
+            ],
+            "transitions": [
+                "T_T_T"
+            ]
+        },
+        "H_H_H": {
+            "labels": [
+                "deadlock"
+            ],
+            "transitions": [
+                "H_H_H"
+            ]
+        }
+    }
+}

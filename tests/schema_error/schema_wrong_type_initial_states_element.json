@@ -1,0 +1,16 @@
+{
+    "atomic_propositions": [
+        "is_lit"
+    ],
+    "initial_states": [
+        123
+    ],
+    "states": {
+        "s_off": {
+            "labels": [],
+            "transitions": [
+                "s_off"
+            ]
+        }
+    }
+}

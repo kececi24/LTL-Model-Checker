@@ -1,0 +1,18 @@
+{
+    "atomic_propositions": [
+        "running"
+    ],
+    "initial_states": [
+        "s_loop"
+    ],
+    "states": {
+        "s_loop": {
+            "labels": [
+                "running"
+            ],
+            "transitions": [
+                "s_loop"
+            ]
+        }
+    }
+}

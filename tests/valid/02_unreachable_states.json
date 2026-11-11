@@ -1,0 +1,41 @@
+{
+    "atomic_propositions": [
+        "ready",
+        "isolated"
+    ],
+    "initial_states": [
+        "s0"
+    ],
+    "states": {
+        "s0": {
+            "labels": [
+                "ready"
+            ],
+            "transitions": [
+                "s1"
+            ]
+        },
+        "s1": {
+            "labels": [],
+            "transitions": [
+                "s0"
+            ]
+        },
+        "s_unreachable_1": {
+            "labels": [
+                "isolated"
+            ],
+            "transitions": [
+                "s_unreachable_2"
+            ]
+        },
+        "s_unreachable_2": {
+            "labels": [
+                "isolated"
+            ],
+            "transitions": [
+                "s_unreachable_1"
+            ]
+        }
+    }
+}

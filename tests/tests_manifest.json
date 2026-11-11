@@ -1,0 +1,357 @@
+{
+  "test_suite": "BLG345E Phase 1 Kripke Structure Model Checker Test Suite",
+  "version": "1.0",
+  "tests": [
+    {
+      "id": "valid_01",
+      "file": "valid/01_light_switch.json",
+      "category": "valid",
+      "description": "Standard two-state light switch model from PDF Example 0",
+      "expected_exit_code": 0,
+      "expected_output_prefixes": ["[PARSER]", "[METRICS]", "[REACHABILITY]", "[DIAGNOSTICS]"],
+      "expected_metrics": {
+        "total_states": 2,
+        "total_transitions": 4,
+        "reachable_states": 2,
+        "unreachable_states": 0
+      },
+      "pdf_reference": "Section 2: Example 0 (p. 3)"
+    },
+    {
+      "id": "valid_02",
+      "file": "valid/02_unreachable_states.json",
+      "category": "valid",
+      "description": "Model with unreachable states; must be accepted as valid and report unreachable count > 0",
+      "expected_exit_code": 0,
+      "expected_output_prefixes": ["[PARSER]", "[METRICS]", "[REACHABILITY]", "[DIAGNOSTICS]"],
+      "expected_metrics": {
+        "total_states": 4,
+        "total_transitions": 4,
+        "reachable_states": 2,
+        "unreachable_states": 2
+      },
+      "pdf_reference": "Additional Parser Test Cases #5 (p. 4), Phase 3 (p. 11)"
+    },
+    {
+      "id": "valid_03",
+      "file": "valid/03_multiple_initial_states.json",
+      "category": "valid",
+      "description": "Model containing multiple initial states branching to a common target",
+      "expected_exit_code": 0,
+      "expected_output_prefixes": ["[PARSER]", "[METRICS]", "[REACHABILITY]", "[DIAGNOSTICS]"],
+      "expected_metrics": {
+        "total_states": 3,
+        "total_transitions": 4,
+        "reachable_states": 3,
+        "unreachable_states": 0
+      },
+      "pdf_reference": "Section 1.3 (p. 2), Phase 3 (p. 11)"
+    },
+    {
+      "id": "valid_04",
+      "file": "valid/04_single_state_self_loop.json",
+      "category": "valid",
+      "description": "Minimal valid single-state Kripke structure with a self-loop",
+      "expected_exit_code": 0,
+      "expected_output_prefixes": ["[PARSER]", "[METRICS]", "[REACHABILITY]", "[DIAGNOSTICS]"],
+      "expected_metrics": {
+        "total_states": 1,
+        "total_transitions": 1,
+        "reachable_states": 1,
+        "unreachable_states": 0
+      },
+      "pdf_reference": "Phase 2.3 Transition Totality (p. 11)"
+    },
+    {
+      "id": "valid_05",
+      "file": "valid/05_dining_philosophers_sample.json",
+      "category": "valid",
+      "description": "Dining philosophers sub-model showing deadlock state modeled via self-loop",
+      "expected_exit_code": 0,
+      "expected_output_prefixes": ["[PARSER]", "[METRICS]", "[REACHABILITY]", "[DIAGNOSTICS]"],
+      "expected_metrics": {
+        "total_states": 4,
+        "total_transitions": 6,
+        "reachable_states": 4,
+        "unreachable_states": 0
+      },
+      "pdf_reference": "Problem 1 (p. 5), Phase 2.3 (p. 11)"
+    },
+    {
+      "id": "valid_06",
+      "file": "valid/06_complex_branching_and_cycles.json",
+      "category": "valid",
+      "description": "Complex graph with multiple branches, cycles, and an unreachable subcomponent",
+      "expected_exit_code": 0,
+      "expected_output_prefixes": ["[PARSER]", "[METRICS]", "[REACHABILITY]", "[DIAGNOSTICS]"],
+      "expected_metrics": {
+        "total_states": 7,
+        "total_transitions": 8,
+        "reachable_states": 5,
+        "unreachable_states": 2
+      },
+      "pdf_reference": "Phase 3 (p. 11)"
+    },
+    {
+      "id": "syntax_01",
+      "file": "syntax_error/syntax_unclosed_brace.json",
+      "category": "syntax_error",
+      "description": "JSON document missing closing brace",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SYNTAX ERROR]",
+      "pdf_reference": "Phase 1.1 (p. 10), Error Handling (p. 13)"
+    },
+    {
+      "id": "syntax_02",
+      "file": "syntax_error/syntax_trailing_comma.json",
+      "category": "syntax_error",
+      "description": "JSON array contains an illegal trailing comma",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SYNTAX ERROR]",
+      "pdf_reference": "Phase 1.1 (p. 10), Error Handling (p. 13)"
+    },
+    {
+      "id": "syntax_03",
+      "file": "syntax_error/syntax_missing_colon.json",
+      "category": "syntax_error",
+      "description": "JSON object missing colon delimiter after key",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SYNTAX ERROR]",
+      "pdf_reference": "Phase 1.1 (p. 10), Error Handling (p. 13)"
+    },
+    {
+      "id": "syntax_04",
+      "file": "syntax_error/syntax_unquoted_key.json",
+      "category": "syntax_error",
+      "description": "JSON key lacks quotation marks",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SYNTAX ERROR]",
+      "pdf_reference": "Phase 1.1 (p. 10), Error Handling (p. 13)"
+    },
+    {
+      "id": "syntax_05",
+      "file": "syntax_error/syntax_empty_file.json",
+      "category": "syntax_error",
+      "description": "Completely empty input file",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SYNTAX ERROR]",
+      "pdf_reference": "Phase 1.1 (p. 10), Error Handling (p. 13)"
+    },
+    {
+      "id": "schema_01",
+      "file": "schema_error/schema_missing_atomic_propositions.json",
+      "category": "schema_error",
+      "description": "Top-level object is missing required key 'atomic_propositions'",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_02",
+      "file": "schema_error/schema_missing_initial_states.json",
+      "category": "schema_error",
+      "description": "Top-level object is missing required key 'initial_states'",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_03",
+      "file": "schema_error/schema_missing_states.json",
+      "category": "schema_error",
+      "description": "Top-level object is missing required key 'states'",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_04",
+      "file": "schema_error/schema_unexpected_toplevel_key.json",
+      "category": "schema_error",
+      "description": "JSON object contains an unknown top-level key",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_05",
+      "file": "schema_error/schema_unexpected_state_key.json",
+      "category": "schema_error",
+      "description": "A state entry contains an unexpected property",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_06",
+      "file": "schema_error/schema_missing_state_labels.json",
+      "category": "schema_error",
+      "description": "State object is missing required key 'labels'",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_07",
+      "file": "schema_error/schema_missing_state_transitions.json",
+      "category": "schema_error",
+      "description": "State object is missing required key 'transitions'",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_08",
+      "file": "schema_error/schema_wrong_type_atomic_propositions.json",
+      "category": "schema_error",
+      "description": "'atomic_propositions' provided as a string instead of array",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_09",
+      "file": "schema_error/schema_wrong_type_initial_states.json",
+      "category": "schema_error",
+      "description": "'initial_states' provided as a string instead of array",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_10",
+      "file": "schema_error/schema_wrong_type_states.json",
+      "category": "schema_error",
+      "description": "'states' provided as an array instead of object/dict",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_11",
+      "file": "schema_error/schema_wrong_type_ap_element.json",
+      "category": "schema_error",
+      "description": "'atomic_propositions' contains non-string elements",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_12",
+      "file": "schema_error/schema_wrong_type_initial_states_element.json",
+      "category": "schema_error",
+      "description": "'initial_states' contains non-string elements",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_13",
+      "file": "schema_error/schema_wrong_type_labels_element.json",
+      "category": "schema_error",
+      "description": "'labels' in a state contains non-string elements",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "schema_14",
+      "file": "schema_error/schema_wrong_type_transitions_element.json",
+      "category": "schema_error",
+      "description": "'transitions' in a state contains non-string elements",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SCHEMA ERROR]",
+      "pdf_reference": "Section 1.3 (p. 2), Phase 1.1 (p. 10)"
+    },
+    {
+      "id": "semantic_01",
+      "file": "semantic_error/semantic_case1_dangling_transition.json",
+      "category": "semantic_error",
+      "description": "Outgoing transition references an undeclared state identifier",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Additional Parser Test Cases #1 (p. 4), Phase 2.1 (p. 10)"
+    },
+    {
+      "id": "semantic_02",
+      "file": "semantic_error/semantic_case2_undeclared_atomic_proposition.json",
+      "category": "semantic_error",
+      "description": "State label references an undeclared atomic proposition",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Additional Parser Test Cases #2 (p. 4), Phase 2.2 (p. 11)"
+    },
+    {
+      "id": "semantic_03",
+      "file": "semantic_error/semantic_case3_no_outgoing_transitions.json",
+      "category": "semantic_error",
+      "description": "State has no outgoing transitions (violating transition totality)",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Additional Parser Test Cases #3 (p. 4), Phase 2.3 (p. 11)"
+    },
+    {
+      "id": "semantic_04",
+      "file": "semantic_error/semantic_case4_undeclared_initial_state.json",
+      "category": "semantic_error",
+      "description": "Initial state references an identifier not declared in 'states'",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Additional Parser Test Cases #4 (p. 4), Phase 2.4 (p. 11)"
+    },
+    {
+      "id": "semantic_05",
+      "file": "semantic_error/semantic_empty_initial_states.json",
+      "category": "semantic_error",
+      "description": "'initial_states' array is empty",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Phase 2.4 (p. 11)"
+    },
+    {
+      "id": "semantic_06",
+      "file": "semantic_error/semantic_empty_states.json",
+      "category": "semantic_error",
+      "description": "'states' dictionary is empty",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Phase 2.6 (p. 11)"
+    },
+    {
+      "id": "semantic_07",
+      "file": "semantic_error/semantic_duplicate_atomic_propositions.json",
+      "category": "semantic_error",
+      "description": "'atomic_propositions' contains duplicate entries",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Phase 2.5 (p. 11)"
+    },
+    {
+      "id": "semantic_08",
+      "file": "semantic_error/semantic_duplicate_initial_states.json",
+      "category": "semantic_error",
+      "description": "'initial_states' contains duplicate entries",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Phase 2.5 (p. 11)"
+    },
+    {
+      "id": "semantic_09",
+      "file": "semantic_error/semantic_duplicate_state_labels.json",
+      "category": "semantic_error",
+      "description": "A state's 'labels' array contains duplicate entries",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Phase 2.5 (p. 11)"
+    },
+    {
+      "id": "semantic_10",
+      "file": "semantic_error/semantic_duplicate_state_transitions.json",
+      "category": "semantic_error",
+      "description": "A state's 'transitions' array contains duplicate entries",
+      "expected_exit_code": 1,
+      "expected_error_prefix": "[SEMANTIC ERROR]",
+      "pdf_reference": "Phase 2.5 (p. 11)"
+    }
+  ]
+}

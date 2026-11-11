@@ -1,0 +1,38 @@
+{
+    "atomic_propositions": [
+        "is_init_a",
+        "is_init_b",
+        "is_joined"
+    ],
+    "initial_states": [
+        "init_a",
+        "init_b"
+    ],
+    "states": {
+        "init_a": {
+            "labels": [
+                "is_init_a"
+            ],
+            "transitions": [
+                "converged"
+            ]
+        },
+        "init_b": {
+            "labels": [
+                "is_init_b"
+            ],
+            "transitions": [
+                "converged"
+            ]
+        },
+        "converged": {
+            "labels": [
+                "is_joined"
+            ],
+            "transitions": [
+                "init_a",
+                "init_b"
+            ]
+        }
+    }
+}

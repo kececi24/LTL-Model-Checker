@@ -1,0 +1,13 @@
+{
+    "initial_states": [
+        "s_off"
+    ],
+    "states": {
+        "s_off": {
+            "labels": [],
+            "transitions": [
+                "s_off"
+            ]
+        }
+    }
+}

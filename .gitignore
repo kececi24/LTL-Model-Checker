@@ -1,0 +1,64 @@
+# Build Directories
+build/
+bin/
+out/
+cmake-build-*/
+
+# Compiled Executables and Artifacts in Project Root
+my_checker.exe
+my_checker_linux
+my_checker
+*.exe
+*.out
+*.app
+
+# Object files & Libraries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+
+# CMake Generated Files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.ninja
+.ninja_*
+
+# Python & Testing artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDE / Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vs/
+*.suo
+*.user
+*.userosv
+*.sln
+*.vcxproj
+*.vcxproj.filters
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project Submission Archive
+Project_Phase1_*.zip
+*.zip
+*.tar.gz
+*.7z
+
+# NuSMV Output Logs (temporary)
+*.smv.out
+*.nusmv.log

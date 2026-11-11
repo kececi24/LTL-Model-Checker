@@ -1,0 +1,64 @@
+{
+    "atomic_propositions": [
+        "flag_root",
+        "flag_leaf",
+        "flag_island"
+    ],
+    "initial_states": [
+        "root"
+    ],
+    "states": {
+        "root": {
+            "labels": [
+                "flag_root"
+            ],
+            "transitions": [
+                "left_branch",
+                "right_branch"
+            ]
+        },
+        "left_branch": {
+            "labels": [],
+            "transitions": [
+                "left_leaf",
+                "merge"
+            ]
+        },
+        "right_branch": {
+            "labels": [],
+            "transitions": [
+                "merge"
+            ]
+        },
+        "left_leaf": {
+            "labels": [
+                "flag_leaf"
+            ],
+            "transitions": [
+                "root"
+            ]
+        },
+        "merge": {
+            "labels": [],
+            "transitions": [
+                "root"
+            ]
+        },
+        "island_a": {
+            "labels": [
+                "flag_island"
+            ],
+            "transitions": [
+                "island_b"
+            ]
+        },
+        "island_b": {
+            "labels": [
+                "flag_island"
+            ],
+            "transitions": [
+                "island_a"
+            ]
+        }
+    }
+}

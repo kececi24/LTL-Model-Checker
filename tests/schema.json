@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BLG345E Kripke Structure Model Schema",
+  "description": "Standardized JSON Schema for BLG 345E Logic and Computability Term Project Phase 1 models",
+  "type": "object",
+  "required": [
+    "atomic_propositions",
+    "initial_states",
+    "states"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "atomic_propositions": {
+      "type": "array",
+      "description": "List of global atomic proposition identifiers",
+      "items": {
+        "type": "string"
+      }
+    },
+    "initial_states": {
+      "type": "array",
+      "description": "List of initial state identifiers",
+      "items": {
+        "type": "string"
+      }
+    },
+    "states": {
+      "type": "object",
+      "description": "Dictionary of states defining active labels and outgoing transitions",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "labels",
+          "transitions"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "labels": {
+            "type": "array",
+            "description": "Active atomic propositions for this state",
+            "items": {
+              "type": "string"
+            }
+          },
+          "transitions": {
+            "type": "array",
+            "description": "List of target state identifiers for outgoing transitions",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
